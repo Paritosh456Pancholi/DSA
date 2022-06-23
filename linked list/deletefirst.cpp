@@ -17,23 +17,30 @@ using namespace std;
     cout<<head->data<<" ";
     rprint(head->next);
  }
- Node *insertbegin(Node *head,int x){
+ Node *insertend(Node *head,int x){
     Node* temp=new Node(x);
-    if(head==NULL)
-        return temp;
-    Node *curr=head;
-    while(curr->next!=NULL){
-        curr=curr->next;
+    temp->next=head;
+    return temp;
+ }
+ Node *delbegin(Node *head){
+    if(head==NULL){
+        return NULL;
     }
-    curr->next=temp;
-    return head;
+    else{
+        Node *temp=head->next;
+        delete (head);
+        return temp;
+    }
  }
 
 int main() {
     Node *head=NULL;
-    head= insertbegin(head,10);
-    head= insertbegin(head,20);
-    head= insertbegin(head,30);
+    head= insertend(head,30);
+    head= insertend(head,20);
+    head= insertend(head,10);
+    rprint(head);
+    cout<<endl;
+    head=delbegin(head);
     rprint(head);
     return 0;
 }
