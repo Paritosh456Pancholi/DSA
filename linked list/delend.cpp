@@ -22,14 +22,21 @@ using namespace std;
     temp->next=head;
     return temp;
  }
- Node *delbegin(Node *head){
+ Node *delend(Node *head){
     if(head==NULL){
         return NULL;
     }
-    else{
-        Node *temp=head->next;
-        delete (head);
-        return temp;
+    if(head->next==NULL){
+        delete(head);
+        return NULL;
+    }
+    else{Node*curr=head;
+    while(curr->next->next!=NULL){
+        curr=curr->next;
+    }
+    delete(curr->next);
+    curr->next=NULL;
+    return head;
     }
  }
 
@@ -40,7 +47,7 @@ int main() {
     head= insertend(head,10);
     rprint(head);
     cout<<endl;
-    head=delbegin(head);
+    head=delend(head);
     rprint(head);
     return 0;
 }
