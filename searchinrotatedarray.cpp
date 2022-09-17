@@ -1,49 +1,25 @@
-#include <iostream>
-#include <cmath>
+#include <map>
+#include <vector>
+ 
 using namespace std;
-int Searchinrot(int arr[],int n,int key){
-    {int l=0;
-    int h=n-1;
-    int mid=l+(h-l)/2;
-    while(l<=h){
-        if(arr[mid]==key){
-            return mid;
-        }
-        else if(arr[l]<arr[mid]){
-            if(arr[l]<=key&&arr[mid]<key){
-                h=mid-1;
+ 
+class Solution {
+public:
+    vector twoSum(vector &numbers, int target) {
+        int len = numbers.size();
+        map<int, int> r;
+        vector rr;
+        for (int i = 0; i < len; i ++) {
+            if (r.find(numbers[i]) == r.end()) { // if not exist
+                r[numbers[i]] = i;  // add it to the map
             }
-            else {
-                l=mid+1;
+            int j, num = target - numbers[i];
+            if ((r.find(num) != r.end()) && ((j = r[num]) < i)) {
+                rr.push_back(j + 1);
+                rr.push_back(i + 1);
+                return rr;
             }
-
         }
-        else{
-           if(arr[mid]<=key&&arr[h]>key){
-                l=mid+1;
-            }
-            else {
-                h=mid-1;
-            } 
-        }
+        return rr;
     }
-
-
-    }
-}    
-int main() {
-    
-    int n,key;
-    cin>>key;
-    cin>>n;
-    int arr[n];
-    for(int i=0; i < n; i++)
-       {
-           cout<<arr[i]<<" ";
-       }
-    cout<<endl;
-    
-    Searchinrot(arr,n,key);
-    return 0;
-    
-}
+};
