@@ -1,0 +1,48 @@
+/*
+    Time Complexity : O(N^4)
+    Space Complexity : O(1)
+
+    Where N is the size of the matrix.
+*/
+
+int maximumSubSquare(vector < vector < int > > & matrix, int n) {
+
+    // To store the ans
+    int ans = 0;
+
+    // For every Bottom right corner
+    for (int x2 = 0; x2 < n; x2++) {
+        for (int y2 = 0; y2 < n; y2++) {
+            // For every Top left corner
+            for (int x1 = 0; x1 <= x2; x1++) {
+                // Difference in x coordinates
+                int diff = x2 - x1;
+
+                // Top left corner
+                int y1 = y2 - diff;
+
+                if (y1 < 0) continue;
+
+                // Checking all the corner elements of the current square matrix are one or not.
+                bool isPossible = 1;
+
+                for (int i = 0; i <= diff; i++) {
+                    if (matrix[x1 + i][y1] == 0 || matrix[x2 - i][y2] == 0 || matrix[x1][y1 + i] == 0 || matrix[x2][y2 - i] == 0) {
+                        isPossible = 0;
+                    }
+                }
+
+                // If all the border elements are 1
+                if (isPossible) {
+                    // Updating the ans accordingly
+                    ans = max(ans, diff + 1);
+
+                }
+
+            }
+        }
+    }
+
+    // Return the ans
+    return ans;
+}
