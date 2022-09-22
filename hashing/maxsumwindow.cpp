@@ -6,10 +6,11 @@ int maxsum(int arr[],int n,int k){
         int curr=0;
         for(int j=0;j<k;j++){
             curr+=arr[i+j];
-        maxsum=max(maxsum,curr);
         }
-    return maxsum;
+        maxsum=max(maxsum,curr);
+    
     }
+    return maxsum;
 }
 int main(){
     int n=5;
